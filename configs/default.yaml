@@ -1,0 +1,32 @@
+# DeepMIMO data generation parameters
+data:
+  scenarios: ["O1_28", "O1_60", "Boston5G"]
+  n_antennas_bs: 64       # must match codebook size
+  n_subcarriers: 32
+  n_users_per_row: 100
+  active_rows: [1, 100]
+
+# Beam prediction task
+beam:
+  n_beams: 64             # codebook size
+
+# Training
+train:
+  seed: 42
+  batch_size: 64
+  learning_rate: 1e-4
+  epochs: 50
+  val_split: 0.1
+  test_split: 0.1
+
+# LoRA config
+lora:
+  r: 8
+  lora_alpha: 32
+  lora_dropout: 0.1
+  bias: "none"
+
+# W&B
+wandb:
+  project: "6g-lwm-beam-prediction"
+  entity: null            # fill in your W&B username

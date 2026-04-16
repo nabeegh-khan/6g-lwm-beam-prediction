@@ -1,0 +1,21 @@
+# data files - too large for git
+*.h5
+*.hdf5
+*.mat
+*.npy
+*.npz
+
+# environment
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# model weights
+*.pth
+*.onnx
+
+# W&B local runs
+wandb/
+
+# google colab mount artifacts
+.config/

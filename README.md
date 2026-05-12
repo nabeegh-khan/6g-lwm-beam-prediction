@@ -148,11 +148,9 @@ All experiments use `SEED=42` for full reproducibility. Data is generated from p
 
 ---
 
-## AI Assistance Disclosure
+## AI Assistance
 
-This project was built end-to-end using Claude (Anthropic) as the primary development tool. Research direction, architecture selection, dataset discovery, code, debugging, and interpretation of results were all generated through an iterative dialogue with Claude. I directed the goals, reviewed outputs, ran the code, and made decisions about what to keep — but I would not claim independent authorship of the technical decisions.
-
-I'm disclosing this transparently because I think honest AI usage is more valuable to the ML community than presenting AI-assisted work as fully independent. My contribution was in scoping the problem, executing the pipeline, and learning from the process — not in originating the technical solutions from scratch.
+This project was developed with significant assistance from Claude (Anthropic). Claude generated the implementation code, suggested the LoRA injection strategy and rank ablation design, and helped debug across Google Colab and ONNX export workflows. My contribution was scoping the research question (whether low-rank adapters could match full fine-tuning while enabling per-scenario adaptation), selecting LWM v1.1 and the three DeepMIMO city scenarios, running all experiments and tracking them in Weights & Biases, validating the cross-scenario transfer results, and learning the foundation-model fine-tuning and ONNX deployment stacks hands-on. I treat this project as a learning artifact rather than independent technical work.
 
 ---
 

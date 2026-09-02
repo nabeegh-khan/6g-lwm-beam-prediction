@@ -100,14 +100,16 @@ LoRA adaptation with 20% of the data matches full fine-tuning within 0.3 points,
 
 | Config | Mean latency | P99 | Size | Top-1 |
 |---|---|---|---|---|
-| PyTorch FP32 (GPU) | 22.2 ms | 100.4 ms | 10.6 MB | 73.0% |
-| ONNX FP32 (CPU) | 4.0 ms | 6.8 ms | 10.6 MB | 73.0% |
-| ONNX INT8 (CPU) | 5.8 ms | 8.2 ms | 3.2 MB | 70.5% |
+| PyTorch FP32 (GPU) | 17.05 ms | 28.8 ms | 10.56 MB | 73.0% |
+| ONNX FP32 (CPU) | 5.05 ms | 8.7 ms | 10.56 MB | 73.0% |
+| ONNX INT8 (CPU) | 8.53 ms | 33.2 ms | 3.22 MB | 70.5% |
 
 ![Deployment benchmark](figures/04_deployment_benchmark.png)
 *Latency, size, and accuracy across the PyTorch and ONNX configurations.*
 
-Exporting to ONNX FP32 gives a 5.51× single-sample speedup over PyTorch-on-GPU with no accuracy loss. INT8 quantization cuts size 69.5% for a 2.5-point accuracy drop. Note that INT8 is not faster than FP32 ONNX here: it's a small model on CPU, so INT8's benefit is size, not speed.
+Exporting to ONNX FP32 and running on CPU is 3.38× faster on mean single-sample latency than PyTorch on GPU, with no accuracy loss. That comparison crosses devices, so read it as "this model does not need a GPU" rather than as an ONNX-versus-PyTorch benchmark. INT8 quantization cuts size 69.5% for a 2.5-point accuracy drop, and it is the worst option for latency here: mean 8.53 ms against 5.05 ms for FP32 ONNX, and a P99 of 33.2 ms that is worse than PyTorch's 28.8 ms. On a model this small, INT8 buys size and costs both accuracy and tail latency.
+
+Numbers are from the run committed in `04_onnx_deployment.ipynb` on a Colab T4 instance, batch size 1, 500 runs. Latency on shared cloud hardware varies between sessions; the P99 spread on INT8 (std 5.9 ms) shows it.
 
 ## Reproduce
 
